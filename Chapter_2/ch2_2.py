@@ -1,0 +1,11 @@
+print(f" *** Number Fun ***")
+num = int(input('Enter a 3-digit number : '))
+binary = format(num, '08b')
+binary = binary[-8:]
+print(f'You have entered     => {num}')
+print(f'Square               => {num**2:,}')
+print(f'25% 3 decimal places => {(num*0.25):.3f}%')
+print(f'Flipping             => {int(str(num)[::-1])}')
+print(f'Hexadecimal          => {num:x} or {num:X}')
+print(f'Binary               => {binary}')
+print(f'Binary right 8-digit => {binary[:4]} {binary[4:]}')
