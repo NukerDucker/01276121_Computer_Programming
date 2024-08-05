@@ -1,0 +1,17 @@
+print(" *** Integer summation from 1 to n ***")
+n = input("Enter an integer(n): ")
+try:
+    n = int(n)
+    a = 1
+    sum = 0
+    print("Summation => ", end="")
+    while a <= n:
+        if a == n:
+            print(f"{a}",end='')
+        else:
+            print(f"{a}+", end='')
+        a += 1
+    print(f" = {int(n*(n+1)/2)}")
+except:
+    print(" !!! INVALID input => " + n)
+print("===== End of progrm =====\n")
