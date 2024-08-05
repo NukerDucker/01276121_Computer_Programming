@@ -7,11 +7,12 @@ try:
     print("Summation => ", end="")
     while a <= n:
         if a == n:
-            print(f"{a}",end='')
+            print(f"{a}",end="")
         else:
-            print(f"{a}+", end='')
+            print(f"{a}+", end="")
+        sum += a
         a += 1
-    print(f" = {int(n*(n+1)/2)}")
+    print(f" = {sum}")
 except:
     print(" !!! INVALID input => " + n)
 print("===== End of progrm =====\n")
