@@ -3,7 +3,7 @@ N = int(input("Input a positive integer : "))
 if N > 0:
     print()
 
-    for i in range(1, N + 1):
+    for i in range(1, N - 1):
         print("*" * i, end="")
         print(" " * (N - i) * 2, end="")
         print("*" * i)

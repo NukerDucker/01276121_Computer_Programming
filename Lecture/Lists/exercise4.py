@@ -7,6 +7,7 @@ directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 current_direction = 0
 
 row, col = 0, 0
+
 for num in range(1, width * height + 1):
     matrix[row][col] = num
 

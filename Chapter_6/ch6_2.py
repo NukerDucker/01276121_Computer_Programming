@@ -1,11 +1,8 @@
 print(" *** Reverse Even ***")
 usr_input = [int(i) for i in input("Enter integers : ").split()]
-result_list = []
-print(usr_input)
-
 even_numbers = [i for i in usr_input if i % 2 == 0]
+result_list = []
 even_numbers.reverse()
-
 even_index = 0
 
 for num in usr_input:
@@ -14,6 +11,7 @@ for num in usr_input:
         even_index += 1
     else:
         result_list.append(num)
-
+        
+print(usr_input)
 print(result_list)
 print("===== End of program =====")
