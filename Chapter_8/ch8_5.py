@@ -41,10 +41,10 @@ height, type_square = input('Enter Your List : ').split()
 height = int(height)
 
 if type_square == '1':
-    print(square_hollow_star(height))
+    square_hollow_star(height)
 elif type_square == '2':
-    print(square_hollow_num(height))
+    square_hollow_num(height)
 elif type_square == '3':
-    print( square_num(height))
+    square_num(height)
     
 print('===== End of program =====')
