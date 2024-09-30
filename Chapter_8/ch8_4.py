@@ -1,16 +1,28 @@
-def SumArrayZero(num_list):
-    summation = []
-    length = len(num_list)
-    if length <= 2:
-        print()
-    for i in range(length):
-        for j in range(i + 1, length):
-            for k in range(j + 1, length):
-                triplet = [num_list[i], num_list[j], num_list[k]]
-                if sum(triplet) == 0 and triplet not in summation:
-                    summation.append(triplet)
-    return summation
+size, outer = input('Enter size and outermost layer : ').split()
+digits_length = int(len(outer))
+size, outer = int(size), int(outer)
 
-input_list = input('Enter Your List : ').split(' ')
-num_list = [int(i) for i in input_list]
-print(SumArrayZero(num_list))
+def layerCake(size, outer, length):
+    matrix = [[0] * size for _ in range(size)]
+    for layer in range((size + 1) // 2):
+        value = outer - layer
+
+        for i in range(layer, size - layer):
+            matrix[layer][i] = value
+
+        for i in range(layer + 1, size - layer):
+            matrix[i][size - layer - 1] = value
+
+        for i in range(size - layer - 2, layer - 1, -1):
+            matrix[size - layer - 1][i] = value
+
+        for i in range(size - layer - 2, layer, -1):
+            matrix[i][layer] = value
+
+    for row in matrix:
+        for val in row:
+            print(f' {val:>{length}}', end='')
+        print()
+
+if __name__ == "__main__":
+    layerCake(size, outer, digits_length)

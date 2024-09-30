@@ -1,50 +1,94 @@
-def num_generator(num_range):
-    num_str = ''
-    num = 1
-    for _ in range(1, num_range + 1):
-        if num == 10:
-            num = 0
-        num_str += f'{num}'
-        num += 1
-    return num_str
-
-def square_hollow_star(h):
-    output = ''
-    output += f"{'*' * h}\n"
-    for _ in range(h - 2):
-        output += f'*{" " * (h - 2)}*\n'
-    output += '*' * h
-    return output
-
-def square_hollow_num(h):
-    output = ''
-    num_str = num_generator(h)
-    reversed_num = num_str[::-1]
-    output += f'{reversed_num}\n'
-    for i in range(len(num_str) - 2):
-        output += f'{reversed_num[i + 1:i + 2]}{" " * (len(num_str) - 2)}{num_str[i + 1:i + 2]}\n'
-    output += num_str
-    return output
+def generate_spiral(*args):
+    h = int(args[0])
+    matrix = [[''] * h for _ in range(h)]
+    direction = args[1] if len(args) > 1 else 'right'  
+    word = args[2] if len(args) > 2 else None 
     
-def square_num(h):
-    num_str = num_generator(h)
-    output = ''
-    for i in range(len(num_str)):
-        output += f'{num_str[:i] + num_str[i] * (h - i)}'
-        if i < len(num_str) - 1:
-            output += '\n'
-    return output
-        
-print(' *** Display square ***')
+    if h % 2 != 0:
+        row, col = h // 2, h // 2
+    else:
+        if direction == 'right':
+            row, col = h // 2 - 1, h // 2 - 1 
+        elif direction == 'left':
+            row, col = h // 2, h // 2 
+        elif direction == 'up':
+            row, col = h // 2, h // 2 - 1
+        elif direction == 'down':
+            row, col = h // 2 - 1, h // 2
 
-height, type_square = input('Enter Your List : ').split()
-height = int(height)
+    if direction == 'up':
+        directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]  # up -> right -> down -> left
+    elif direction == 'down':
+        directions = [(1, 0), (0, -1), (-1, 0), (0, 1)]  # down -> left -> up -> right
+    elif direction == 'left':
+        directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]  # left -> up -> right -> down
+    elif direction == 'right':
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # right -> down -> left -> up
 
-if type_square == '1':
-    square_hollow_star(height)
-elif type_square == '2':
-    square_hollow_num(height)
-elif type_square == '3':
-    square_num(height)
+    current_direction = 0
+    step_size = 1
+    total_steps = 0
+    steps_in_current_direction = 0
+    count = 0
     
-print('===== End of program =====')
+    if word:
+        word = list(word)
+        word_list_iter = []
+        current_loop_time = 1
+        loop_iter = 0
+        for _ in range(h):
+            word_list_iter.extend(word)
+            loop_iter += 1
+            if current_loop_time == loop_iter:
+                word = [chr(ord(char) + 1) for char in word]
+                current_loop_time += 1
+                loop_iter = 0
+        iter_count = 0
+    else:
+        num = 1
+
+    while count < h * h:
+        if word:
+            matrix[row][col] = word_list_iter[iter_count]
+            iter_count += 1
+        else:
+            matrix[row][col] = str(num)
+            num += 1
+            
+        count += 1
+        steps_in_current_direction += 1
+
+        row += directions[current_direction][0]
+        col += directions[current_direction][1]
+
+        if steps_in_current_direction == step_size:
+            current_direction = (current_direction + 1) % 4
+            steps_in_current_direction = 0
+            total_steps += 1
+            if total_steps % 2 == 0:
+                step_size += 1
+
+    return matrix
+
+def print_spiral(matrix):
+    max_width = max(len(str(element)) for row in matrix for element in row)
+    for row in matrix:
+        col_index = 0 
+        for element in row:
+            if col_index == 0:
+                print(f"{element:>{max_width}}", end=" ")
+            else: 
+                print(f"{element:>{max_width + 1}}", end=" ")
+            col_index += 1
+        print()
+
+print(" *** Center-starting Spiral Rectangle XXX ***")
+inp = input("Enter side [direction] [word] : ")
+
+args = inp.split()
+
+spiral_rectangle = generate_spiral( *args)
+
+print_spiral(spiral_rectangle)
+
+print('===== End of program ======')

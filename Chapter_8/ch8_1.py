@@ -1,13 +1,8 @@
-def myNum(b):
-    b = int(b)
-    return b
+def get_factorial(number: int):
+    factorial = 1
+    for i in range(1, number + 1):
+        factorial = factorial * i
+    return factorial
+an_integer = int(input('Enter an integer : '))
 
-def mySum(a,b):
-    a, b = int(a), int(b)
-    total = a + b
-    return total
-
-print(" *** My sum ***")
-a,b = input("Enter a b : ").split()
-print(f"{a} + {b} => {a} + {myNum(b)} = {mySum(a,b)}")
-print("===== End of program =====")
+print(get_factorial(an_integer))
