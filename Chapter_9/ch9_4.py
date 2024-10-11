@@ -30,22 +30,23 @@ cipher_key = {
     ('X', 'X'): 'y',
 }
 
-def decryptor(encoded):
+def decoder(encoded):
     cipher_chunks = []
     decoded_word = ""
 
     for i in range(0, len(encoded), 2):
         cipher_chunks.append(tuple(encoded[i:i + 2]))
 
-    for j in cipher_chunks:
-        if j in cipher_key:
-            decoded_word += cipher_key[j]
+    for pair in cipher_chunks:
+        if pair in cipher_key:
+            decoded_word += cipher_key[pair]
         else:
             decoded_word = "FAILED TO DECRYPT"
             break
+        
     return decoded_word
 
 if __name__ == "__main__":
     usr_input = input('Input ADFGX cipher text: ')
-    decoded_word = decryptor(usr_input)
+    decoded_word = decoder(usr_input)
     print(decoded_word)

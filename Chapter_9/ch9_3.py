@@ -1,29 +1,30 @@
 def char_count(usr_input):
     words = usr_input.split()
-    full_count = {}
-
+    word_count = {}
+    str_count = {}
     for word in words:
         count_dict = {}
         for char in word:
             count_dict[char] = word.count(char)
-        full_count[word] = count_dict
-        
-    total_count = {}
+        word_count[word] = count_dict
     
     for char in usr_input.replace(" ", ""):
-        total_count[char] = usr_input.count(char)
+        str_count[char] = usr_input.count(char)
     
-    full_count[usr_input] = total_count
+    word_count[usr_input] = str_count
 
-    max_char = max(total_count, key=total_count.get)
-    max_count = total_count[max_char]
+    max_char = max(str_count, key=str_count.get)
+    max_count = str_count[max_char]
 
-    for word, count in full_count.items():
+    for word, count in word_count.items():
         print(f"{word} = {count}")
     
     print(f"Maximum Character Count: {max_char} {max_count}")
 
-if __name__ == "__main__":
+def main():
     usr_input = input('Enter : ')
     char_count(usr_input)
     print("===== End of program =====")
+
+if __name__ == "__main__":
+    main()

@@ -7,7 +7,11 @@ def create_dict(lst):
             dictionary[lst[i]] = int(lst[i + 1])
     return dictionary
 
-print(' *** Creating Dictionary ***')
-usr_input = input('Enter text : ').split()
-print(create_dict(usr_input))
-print('===== End of program =====')
+def main():
+    print(' *** Creating Dictionary ***')
+    usr_input = input('Enter text : ').split()
+    print(create_dict(usr_input))
+    print('===== End of program =====')
+
+if __name__ == "__main__":
+    main()

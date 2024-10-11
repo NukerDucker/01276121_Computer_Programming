@@ -1,2 +1,2 @@
-
-print(num_generator(14))
+x = ord('/n')
+print(f"{x}")
