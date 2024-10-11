@@ -1,23 +1,31 @@
+# กำหนดค่าคงที่สำหรับโหมดเพิ่มขึ้นและลดลง
 INCREASING = '0'
 DECREASING = '1'
 
 def find_substrings(input_data):
     mode, numbers = input_data.split('/')
-    numbers = [int(num) for num in numbers.split()]
+    numbers = [int(num) for num in numbers.split()] # แปลงตัวเลขเป็นลิสต์ของ int
     if len(numbers) < 2:
         return None
+    # เริ่มต้น substring ด้วยตัวเลขตัวแรก
     substrings = [str(numbers[0])]
     for num in numbers[1:]:
+        # ดึงตัวสุดท้ายจาก substring ล่าสุด
         last_number = int(substrings[-1][-1])
+        
+        # ตรวจสอบตามโหมดที่กำหนด
         if mode == INCREASING:
             is_next = num == last_number + 1
         elif mode == DECREASING: 
             is_next = num == last_number - 1
+            
+        # ถ้าตัวถัดไปตรงตามเงื่อนไข จะรวมตัวเลขเข้ากับ substring ล่าสุด
         if is_next:
             substrings[-1] += str(num)
         else:
+            # ไม่ตรงก็สร้าง substring ใหม่
             substrings.append(str(num))
-    
+    # return ลิสต์ของ substrings โดยรวมตัวเลขในแต่ละ substring เข้าด้วยกันเป็นสตริง
     return [" ".join(list(substring)) for substring in substrings]
 
 def main():
